@@ -1,6 +1,6 @@
 services:
-  chainlink-adapter:
-    container_name: chainlink-adapter
+  vmtree-adapter:
+    container_name: vmtree-adapter
     build:
       context: .
       dockerfile: Dockerfile
