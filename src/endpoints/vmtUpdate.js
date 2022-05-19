@@ -10,18 +10,18 @@ const { toVmtUpdateSolidityInput: toSolInput } = utils;
 const wasmPath = path.resolve(`${__dirname}/../zk-stuff/update.wasm`);
 const zkeyPath = path.resolve(`${__dirname}/../zk-stuff/update.zkey`);
 
-module.exports = async function vmtUpdate(req, res, next) {
+module.exports = async function vmtUpdate(req, res) {
     if (!req.body.data) {
         return res.status(400).json({
             error: 'expected `data` in body of request'
         });
     }
+    console.log(req.body.data);
 
-    const { index, leaf, filledSubtrees } = req.body.data;
+    const { startIndex, leaf, filledSubtrees } = req.body.data;
 
     if (
         (typeof startIndex !== 'number')
-        || (!Array.isArray(leaves) || leaves.length !== 10)
         || (!Array.isArray(filledSubtrees) || filledSubtrees.length !== 20)
     ) {
         return res.status(400).json({
@@ -33,6 +33,7 @@ module.exports = async function vmtUpdate(req, res, next) {
         const endSubtrees = calculateSubtrees(
             mimcSponge,
             20,
+            startIndex,
             [leaf],
             filledSubtrees
         );
@@ -40,7 +41,7 @@ module.exports = async function vmtUpdate(req, res, next) {
         const { proof, publicSignals } = await calculateUpdateProof(
             wasmPath,
             zkeyPath,
-            index,
+            startIndex,
             leaf,
             filledSubtrees,
             endSubtrees
@@ -48,10 +49,8 @@ module.exports = async function vmtUpdate(req, res, next) {
 
         const { p, newSubtrees } = toSolInput(proof, publicSignals);
         return res.status(200).json({
-            data: {
-                proof: p,
-                newFilledSubtrees: newSubtrees
-            }
+            proof: p,
+            newFilledSubtrees: newSubtrees
         });
     } catch(err) {
         console.log(err);

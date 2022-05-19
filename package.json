@@ -10,8 +10,12 @@
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "nodemon": "^2.0.16",
-    "vmtjs": "https://github.com/Nobody-Labs/vmt-js"
+    "vmtjs": "https://github.com/nobody-labs/vmt-js.git"
+  },
+  "devDependencies": {
+    "axios": "^0.27.2"
   }
 }

@@ -17,6 +17,8 @@ module.exports = async function vmtMassUpdate(req, res, next) {
         });
     }
 
+    console.log(req.body.data);
+
     const { startIndex, leaves, filledSubtrees } = req.body.data;
 
     if (
@@ -33,6 +35,7 @@ module.exports = async function vmtMassUpdate(req, res, next) {
         const endSubtrees = calculateSubtrees(
             mimcSponge,
             20,
+            startIndex,
             leaves,
             filledSubtrees
         );
@@ -48,10 +51,8 @@ module.exports = async function vmtMassUpdate(req, res, next) {
 
         const { p, newSubtrees } = toSolInput(proof, publicSignals);
         return res.status(200).json({
-            data: {
-                proof: p,
-                newFilledSubtrees: newSubtrees
-            }
+            proof: p,
+            newFilledSubtrees: newSubtrees
         });
     } catch(err) {
         console.log(err);
