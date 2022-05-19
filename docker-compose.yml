@@ -1,3 +1,5 @@
+version: "3.6"
+
 services:
   vmtree-adapter:
     container_name: vmtree-adapter
@@ -14,4 +16,4 @@ services:
 networks:
   default:
     external:
-      name: link_default
+      name: chainlink-node_default
