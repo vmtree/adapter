@@ -6,15 +6,18 @@ Adapter logic callable by the chainlink node is contained in [endpoints](./src/e
 
 ## Install
 ```sh
-$ git clone https://github.com/Nobody-Labs/chainlink-vmt
-$ cd chainlink-vmt
+$ git clone https://github.com/vmtree/adapter.git
+$ cd adapter
 $ yarn
 ```
 
 ## Run
 ```sh
-$ yarn start
-Now listening on http://localhost:8080
+$ docker-compose up -d
+```
+Verify the container is up with
+```sh
+$ docker ps -a 
 ```
 
 ## Send a request
