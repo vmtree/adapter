@@ -1,8 +1,8 @@
 # Chainlink VMT Adapter
-This repository contains external adapters that perform computations for Verifiable Merkle Trees.
+This repository contains external adapters that perform computations for Verifiable Merkle Trees.  In the alpha release of VMTree, the external adapter sits alongside the Chainlink and Postgres Docker containers on a given host.  
 
 ## Architecture 
-[[images/diagram.png]]
+![Diagram](/images/diagram.png)
 
 ## Structure
 Adapter logic callable by the chainlink node is contained in [endpoints](./src/endpoints/). The `app.js` file imports and exposes adapter logic at an endpoint matching its name using `camelCase` capitalization, however it is still a module. The actual server is started in `index.js`. We can specify a custom port by setting the `VMT_ADAPTER_PORT` environment variable in `.env`, or else it will use the default port `8080`. Note that if you alter the adapter port, then the docker-compose file needs to be modified as well.
