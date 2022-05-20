@@ -1,5 +1,5 @@
 # Chainlink VMT Adapter
-This repository contains external adapters that perform computations for Verifiable Merkle Trees.  In the alpha release of VMTree, the external adapter sits alongside the Chainlink and Postgres Docker containers on a given host.  
+This repository contains an external adapter that performs computations for Verifiable Merkle Trees.  In the alpha release of VMTree, the external adapter's Docker container sits alongside the Chainlink and Postgres containers on a given host.  
 
 ## Architecture 
 ![Diagram](/images/diagram.png)
