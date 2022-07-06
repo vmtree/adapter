@@ -25,17 +25,17 @@ module.exports = async function poseidonMassUpdate(req, res) {
             error: `unexpected data length: ${l} (expected 1184 == 37 evm words)`
         });
     }
-    const startIndex = BigNumber.from(buf.slice(0, 32));
+    const startIndex = BigNumber.from(buf.slice(0, 32)).toString();
     const startSubtrees = [], leaves = [];
     for (let i = 1; i < 21; i++) {
         startSubtrees.push(BigNumber.from(
             buf.slice(i * 32, (i * 32) + 32)
-        ));
+        ).toString());
     }
     for (let i = 21; i < 37; i++) {
         leaves.push(BigNumber.from(
             buf.slice(i * 32, (i * 32) + 32)
-        ));
+        ).toString());
     }
 
     try {
@@ -50,12 +50,6 @@ module.exports = async function poseidonMassUpdate(req, res) {
             startSubtrees,
             leaves
         });
-        console.log({
-            newRoot,
-            newSubtrees,
-            p
-        });
-
         if (!(await verifyProof({
             proof,
             publicSignals,
@@ -73,7 +67,7 @@ module.exports = async function poseidonMassUpdate(req, res) {
                 }
             });
         };
-        console.time(`poseidonMassUpdate ${t}`);
+        console.timeEnd(`poseidonMassUpdate ${t}`);
     } catch(err) {
         console.log(err);
         res.status(500).json({
