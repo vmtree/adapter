@@ -1,14 +1,11 @@
 const app = require('express')();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
-const vmtMassUpdate = require('./endpoints/vmtMassUpdate');
-const vmtUpdate = require('./endpoints/vmtUpdate');
+const poseidonMassUpdate = require('./endpoints/poseidonMassUpdate');
 
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/vmtMassUpdate', vmtMassUpdate);
-app.post('/vmtUpdate', vmtUpdate);
+app.post('/poseidonMassUpdate', poseidonMassUpdate);
 
 module.exports = app;

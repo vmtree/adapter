@@ -8,13 +8,16 @@
     "start-dev": "npx nodemon"
   },
   "dependencies": {
+    "@ethersproject/bignumber": "^5.6.2",
+    "@ethersproject/bytes": "^5.6.1",
+    "@ethersproject/solidity": "^5.6.1",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "ethers": "^5.6.8",
     "express": "^4.18.1",
     "nodemon": "^2.0.16",
-    "vmtjs": "https://github.com/nobody-labs/vmt-js.git"
+    "vmtree-sdk": "vmtree/sdk"
   },
   "devDependencies": {
     "axios": "^0.27.2"

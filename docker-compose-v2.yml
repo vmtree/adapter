@@ -1,0 +1,15 @@
+version: "3.6"
+
+services:
+  poseidon-adapter:
+    container_name: poseidon-adapter
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    command: start
+
+networks:
+  default:
+    external:
+      name: link-rinkarby
