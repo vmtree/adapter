@@ -10,9 +10,6 @@ const zkeyFileName = path.resolve(`${__dirname}/../zk-stuff/mass_update.zkey`);
 const verifierJson = require(path.resolve(`${__dirname}/../zk-stuff/mass_update_verifier.json`));
 
 module.exports = async function poseidonMassUpdate(req, res) {
-    const t = Date.now();
-    console.time(`poseidonMassUpdate ${t}`);
-
     if (!req.body.data || !req.body.data.rawData) {
         return res.status(400).json({
             error: 'expected data'
@@ -67,7 +64,6 @@ module.exports = async function poseidonMassUpdate(req, res) {
                 }
             });
         };
-        console.timeEnd(`poseidonMassUpdate ${t}`);
     } catch(err) {
         console.log(err);
         res.status(500).json({

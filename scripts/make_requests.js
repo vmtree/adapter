@@ -14,8 +14,9 @@ const {
     const leaves = unsafeRandomLeaves(16);
 
     try {
+        console.time('requests');
         var requests = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 3; i++) {
             requests.push(axios.post(
                 'http://localhost:8080/poseidonMassUpdate',
                 {
@@ -29,7 +30,7 @@ const {
             ));
         }
         const results = await Promise.all(requests);
-        console.log(result);
+        console.timeEnd('requests');
     } catch(err) {
         console.log(err);
     }
