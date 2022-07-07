@@ -7,6 +7,8 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
+    env_file:
+      - ./src/.env
     command: start
     ports:
       - "127.0.0.1:8080:8080"
