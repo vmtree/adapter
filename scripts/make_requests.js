@@ -11,25 +11,37 @@ const {
 (async function() {
     const startIndex = BigNumber.from(0);
     const { filledSubtrees } = calculateNextRoot({ hasher });
-    const leaves = unsafeRandomLeaves(16);
+    const leaves = [
+        unsafeRandomLeaves(16),
+        unsafeRandomLeaves(16),
+        unsafeRandomLeaves(16),
+        unsafeRandomLeaves(16),
+        unsafeRandomLeaves(16),
+        unsafeRandomLeaves(16),
+        unsafeRandomLeaves(16),
+        unsafeRandomLeaves(16),
+    ];
 
     try {
         console.time('requests');
         var requests = [];
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 4; i++) {
             requests.push(axios.post(
                 'http://localhost:8080/poseidonMassUpdate',
                 {
                     data: {
                         rawData: Buffer.from(arrayify(pack(
                             (new Array(37)).fill('uint256'),
-                            [ startIndex, ...filledSubtrees, ...leaves ]
+                            [ startIndex, ...filledSubtrees, ...leaves[i] ]
                         ))).toString('base64')
                     }
                 }
             ));
         }
         const results = await Promise.all(requests);
+        // console.log( results[0].data );
+        // console.log( results[1].data );
+        // console.log( results[2].data );
         console.timeEnd('requests');
     } catch(err) {
         console.log(err);

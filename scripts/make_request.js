@@ -14,6 +14,7 @@ const {
     const leaves = unsafeRandomLeaves(16);
 
     try {
+        console.time('single request');
         const result = await axios.post(
             'http://localhost:8080/poseidonMassUpdate',
             {
@@ -25,7 +26,7 @@ const {
                 }
             }
         );
-        console.log(result.data);
+        console.timeEnd('single request');
     } catch(err) {
         console.log(err);
     }
